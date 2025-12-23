@@ -1,0 +1,539 @@
+.contact {
+    width: 100%;
+    height: 100vh;
+   
+
+}
+
+
+.location {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:transparent;
+}
+
+.info {
+        position: relative;
+    width: 100%;
+    height: 100vh;
+    display:inline-block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color:transparent;
+}
+
+.info h1{
+    padding: 50px;
+    font-size: 54px;
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    margin: 30px;
+    cursor: pointer;
+    width: fit-content; /* Makes the width fit the content */
+    margin-left: auto; /* Centers the heading horizontally */
+    margin-right: auto; /* Centers the heading horizontally */
+}
+
+.info h1 span {
+    color: red;
+}
+
+/* Bounce Animation */
+.info h1 {
+  animation: bounceIn 2.5s;
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.3); opacity: 0; }
+  50%  { transform: scale(1.05); opacity: 1; }
+  70%  { transform: scale(0.9);}
+  100% { transform: scale(1);}
+}
+
+
+
+.info p {
+    margin-bottom: 18px;
+    margin-left: 20px;
+    color: #000000;
+    font-size: 25px;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 34px 22px;
+    display: flex;
+    align-items: center;      /* Ensures icon and text are vertically centered */
+    width: fit-content;
+    line-height: 1.2;  
+       /* Helps with vertical alignment */
+}
+
+
+
+.info p i {
+    font-size: 32px;
+    margin-right: 16px;
+    color: #000000;
+    min-width: 32px;
+    text-align: center;
+    display: flex;
+    align-items: center;      /* Vertically center icon with text */
+    height: 1em; 
+                 /* Ensures icon aligns with text height */
+}
+header{width: 100%;
+height: 70px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: rgb(90, 90, 90);
+opacity: 95%;
+border-radius: 5px;
+}
+
+header h2{
+    color: rgb(0, 0, 0);
+    width: 30%;
+font-size: 40px;
+text-align: left;
+padding-left: 40px;
+cursor: pointer;
+}
+
+h2 span{
+    color: rgb(223, 12, 12);
+}
+.logo{
+    display: flex;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border-radius: 100%;
+    transition: all 0.6s ease 0s;
+    cursor: pointer;
+    animation: rotateLogo 7s linear infinite; /* Add this line */
+}
+
+@keyframes rotateLogo {
+    0%   { transform: rotate(0deg);}
+    100% { transform: rotate(359deg);}
+}
+nav li{display:inline-block;
+    list-style:none;
+    padding-right: 30px;
+    font-size: 18px;
+
+}
+
+nav li a {
+text-decoration: none;
+color: aliceblue;
+transition: all 0.4s ease 0s;
+position: relative; /* Needed for underline effect */
+}
+
+nav li a::after {
+content: "";
+display: block;
+width: 0;
+height: 3px;
+background: red;
+transition: width 0.4s;
+position: absolute;
+left: 0;
+bottom: -5px;
+border-radius: 2px;
+}
+
+nav li a:hover::after {
+width: 100%;
+}
+
+.logo:hover{
+   transform: scale(1.2);
+
+}
+
+/* Hide menu button by default */
+.menu-btn {
+    display: none;
+}
+
+/* Show menu button only on screens 900px or less */
+@media (max-width: 900px) {
+    .menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 32px;
+        color: #fff;
+        cursor: pointer;
+        position: absolute;
+        right: 30px;
+        top: 30px;
+        z-index: 2000;
+    }
+    nav ul {
+        display: none; /* Hide nav links on small screens by default */
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    header {
+        height: 60px;
+        padding: 10px 15px;
+    }
+    header h2 {
+        font-size: 30px;
+        padding-left: 20px;
+    }
+    .info h1 {
+        font-size: 36px;
+        padding: 30px;
+        margin: 20px;
+    }
+    .info p {
+        font-size: 18px;
+        padding: 20px 15px;
+        margin-left: 10px;
+    }
+    .info p i {
+        font-size: 24px;
+        margin-right: 12px;
+    }
+    .nav ul li {
+        margin: 30px 10px;
+    }
+    .nav ul li a {
+        font-size: 18px;
+    }
+    .text h1 {
+        font-size: 18px;
+    }
+    .frame {
+        margin-top: 60px;
+        height: calc(100vh - 60px);
+    }
+    .footer {
+        height: 150px;
+        padding: 15px 0;
+    }
+    .footer p {
+        font-size: 16px;
+    }
+    .social a {
+        font-size: 20px;
+        margin: 0 8px;
+    }
+}
+
+/* iPad and tablet responsiveness */
+@media (max-width: 1024px) {
+    header {
+        height: 70px;
+        padding: 15px 20px;
+    }
+    header h2 {
+        font-size: 35px;
+        padding-left: 30px;
+    }
+    .info h1 {
+        font-size: 48px;
+        padding: 40px;
+        margin: 25px;
+    }
+    .info p {
+        font-size: 22px;
+        padding: 30px 20px;
+        margin-left: 15px;
+    }
+    .info p i {
+        font-size: 28px;
+        margin-right: 14px;
+    }
+    .nav ul li {
+        margin: 40px 15px;
+    }
+    .nav ul li a {
+        font-size: 22px;
+    }
+    .text h1 {
+        font-size: 22px;
+    }
+    .frame {
+        margin-top: 70px;
+        height: calc(100vh - 70px);
+    }
+    .footer {
+        height: 180px;
+        padding: 20px 0;
+    }
+    .footer p {
+        font-size: 18px;
+    }
+    .social a {
+        font-size: 24px;
+        margin: 0 10px;
+    }
+}
+
+
+
+
+
+
+.frame{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+iframe{
+    width:100%;
+    height:100%;
+    border: none;
+
+
+}
+
+.text{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    font-weight: 900;
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) 5px 5px 5px;
+    font-size: 24px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+}
+
+
+
+
+
+
+section {
+    height: 70vh;
+    padding: 20px;
+    background-image: url('pic/sewing.jpg');
+    background-size: cover;      /* Makes the image cover the section */
+    background-position: center; /* Centers the image */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center;    /* Centers content horizontally */
+    color: rgb(241, 4, 4);          /* Text color */
+    text-align: center;    /* Centers text */
+    font-family: Arial, sans-serif; /* Font style */
+    
+}
+
+
+.name {
+    padding-top: 70px;
+}
+
+.name h1 {
+    font-size: 50px;
+    font-weight:900;
+    margin-top: 90px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds a shadow to the text for better visibility */
+    color: white;
+}
+
+.name h1 span{
+color: RED;
+}
+.nav{
+    width: 100%;
+    z-index: 1000; /* Ensures the nav is above other content */
+    height: 30%;   
+
+}
+
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+} 
+
+.nav ul li  {
+    margin: 50px 20px;
+    font-size: 20px;
+    font-weight: bold; 
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: all 0.5s ease;
+    font-weight: 900;
+    font-size: 24px;
+    position: relative; /* Needed for the underline effect */
+        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Adds a shadow to the text for better visibility */
+
+}
+
+.nav ul li a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 3px;
+    background: rgb(255, 0, 0);
+    transition:  0.4s;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    border-radius: 2px;
+}
+
+.nav ul li a:hover::after {
+    width: 100%; /* Full width on hover */
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.footer img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.footer p {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.social {
+    margin-top: 10px;
+}
+
+.social a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 24px;
+    transition: color 0.3s;
+}
+
+.social a:hover {
+    color: #ff6b6b;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .top-section {
+        height: 50vh;
+        padding: 10px;
+    }
+    .header {
+        margin-bottom: 20px;
+    }
+    .name h1 {
+        font-size: 2rem;
+        margin-top: 20px;
+    }
+    .nav ul {
+        gap: 20px;
+    }
+    .nav a {
+        font-size: 14px;
+    }
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 15px;
+    }
+    .managers-container .card {
+        width: 300px;
+        height: 150px;
+    }
+    .card {
+        width: 100%;
+        height: 150px;
+    }
+    .footer {
+        padding: 15px 0;
+        margin-top: 20px;
+    }
+    .footer p {
+        font-size: 16px;
+    }
+    .social a {
+        font-size: 20px;
+        margin: 0 8px;
+    }
+}
+
+/* iPad and tablet responsiveness */
+@media (max-width: 1024px) {
+    .top-section {
+        height: 60vh;
+        padding: 15px;
+    }
+    .header {
+        margin-bottom: 30px;
+    }
+    .name h1 {
+        font-size: 2.5rem;
+        margin-top: 30px;
+    }
+    .nav ul {
+        gap: 25px;
+    }
+    .nav a {
+        font-size: 16px;
+    }
+    .cards-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        padding: 18px;
+    }
+    .managers-container .card {
+        width: 350px;
+        height: 175px;
+    }
+    .card {
+        width: 100%;
+        height: 175px;
+    }
+    .footer {
+        padding: 18px 0;
+        margin-top: 30px;
+    }
+    .footer p {
+        font-size: 17px;
+    }
+    .social a {
+        font-size: 22px;
+        margin: 0 9px;
+    }
+}
+

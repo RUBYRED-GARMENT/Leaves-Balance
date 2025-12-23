@@ -1,0 +1,127 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.about-hero {
+    background-image: url('about-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.about-story {
+    padding: 2em;
+}
+
+.about-values {
+    padding: 2em;
+}
+
+.about-values ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about-values li {
+    margin-bottom: 10px;
+}
+
+.about-team {
+    padding: 2em;
+}
+
+.about-team ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about-team li {
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    clear: both;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    header {
+        padding: 0.5em;
+    }
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    header nav ul li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .about-hero {
+        height: 50vh;
+        padding: 1em;
+    }
+    .about-story,
+    .about-values,
+    .about-team {
+        padding: 1em;
+    }
+}
+
+/* iPad and tablet responsiveness */
+@media (max-width: 1024px) {
+    header {
+        padding: 0.75em;
+    }
+    header nav ul {
+        justify-content: center;
+        gap: 15px;
+    }
+    header nav ul li {
+        margin-right: 0;
+    }
+    .about-hero {
+        height: 70vh;
+        padding: 1.5em;
+    }
+    .about-story,
+    .about-values,
+    .about-team {
+        padding: 1.5em;
+    }
+}

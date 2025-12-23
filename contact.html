@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUBYRED</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="pic/logooo.png">
+    <style>
+        /* Mobile responsiveness for contact page */
+        @media (max-width: 768px) {
+            .contact {
+                flex-direction: column;
+                height: auto;
+                padding: 20px;
+            }
+            .info {
+                order: 1;
+                height: auto;
+                padding: 20px;
+            }
+            .location {
+                order: 2;
+                height: 300px;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .location iframe {
+                height: 250px;
+            }
+            .info h1 {
+                font-size: 36px;
+                padding: 20px;
+                margin: 20px 0;
+            }
+            .info p {
+                font-size: 18px;
+                padding: 15px 10px;
+                margin-left: 0;
+                margin-bottom: 15px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .info p i {
+                font-size: 24px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .footer {
+                height: auto;
+                padding: 20px;
+            }
+            .footer img {
+                width: 50px;
+                height: 60px;
+            }
+            .footer p {
+                font-size: 16px;
+            }
+            .social a {
+                font-size: 24px;
+                margin: 0 5px;
+            }
+        }
+
+        /* Sidebar styles */
+        #sidebar {
+            position: fixed;
+            top: 170px;
+            right: -250px;
+            width: 250px;
+            height: calc(100vh - 100px);
+            background: rgb(90, 90, 90);
+            opacity: 90%;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.7);
+            transition: right 0.3s ease;
+            z-index: 1050;
+            padding-top: 1rem;
+        }
+        #sidebar.active {
+            right: 0;
+        }
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #sidebar ul li {
+            padding: 1rem 1.5rem;
+        }
+        #sidebar ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        #sidebar ul li a:hover {
+            color: #df0c0c;
+        }
+
+        /* Responsive styles for iPad and tablets */
+        @media (max-width: 1024px) {
+            #sidebar {
+                width: 200px;
+            }
+            #sidebar.active {
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+        <header>
+  <h2>RUBY<span>RED</span></h2>
+  <div class="logo"><img src="pic/logooo.png" alt="rubyred"></div>
+  <button class="menu-btn" id="menu-btn" aria-label="Open navigation">
+    <i class="fas fa-bars"></i>
+  </button>
+  <nav id="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="HR.html">HR</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+</header>
+<div id="sidebar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="HR.html">HR</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+</div>
+
+<div class="contact">
+    <div class="location">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1712.9125084918328!2d29.573181613953704!3d30.835568872383554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145f7ce2791b6595%3A0x28cf9a847e7a1e82!2sRubyred%20Garment%20MANUFACTURING%20S.A.E%20(Borg%20Al-Arab)!5e0!3m2!1sar!2seg!4v1755361169197!5m2!1sar!2seg"
+            width="100%"
+            height="400"
+            style="border:0; border-radius:16px;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+    <div class="info">
+        <div class="text"><h1>Contact <span>Us</span></h1></div>
+        <p><i class="fas fa-phone"></i>:  010 60150042</p>
+        <p><i class="fas fa-envelope"></i>: hr@rubyredgarment.com</p>
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          <a href="https://www.google.com/maps/place/Rubyred+Garment+MANUFACTURING+S.A.E+(Borg+Al-Arab)/@30.835569,29.573182,17z/data=!4m6!3m5!1s0x145f7ce2791b6595:0x28cf9a847e7a1e82!8m2!3d30.835569!4d29.573182!16s%2Fg%2F11j2v7w2n2?entry=ttu"
+             target="_blank"
+             style="color:inherit; text-decoration:underline;">
+            Private Free Zone - BURG EL ARAB | 4th INDUSTRIAL ZONE | BLOCK: 14 | PLOTS: 1, 2, 13, 14 | Alexandria Egypt, Alexandria, Egypt, 0000
+
+          </a>
+        </p>
+    </div>
+    <div class="up">
+    <a href=""><img src="pic/up.jpg" alt="#"></a>
+    </div>
+</div>
+    <div class="footer">
+                <img src="pic/logooo.png" alt="">
+
+        <p> RUBYRED GARMENT</p>
+        <div class="social">
+            <a href="https://www.facebook.com/RUBYREDGARMENTSAE/" target="_blank"><i class="fab fa-facebook-f" ></i></a>
+            <a href="https://www.linkedin.com/company/rubyred-garment-manufacturing-s-a-e/posts/?feedView=all" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="hr@rubyredgarment.com" target="_blank"><i class="fas fa-envelope"></i></a>
+        
+        </div>
+
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    menuBtn.addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+    });
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/68d2c5f7bded921922e24c9a/1j5rlak9q';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+Tawk_API.onLoad = function(){
+    Tawk_API.setAttributes({
+        name : 'contact dep'
+    });
+};
+</script>
+<!--End of Tawk.to Script-->
+
+</body>
+</html>
