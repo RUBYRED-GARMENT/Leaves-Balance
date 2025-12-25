@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rubyred - Employee Leave Portal</title>
+  <link rel="icon" href="pic/logooo.png" />
+
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    background: rgba(15, 23, 42, 0.95);
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+  }
+  h3 { text-align: center; margin-bottom: 20px; color: #38bdf8; }
+  input, select, button {
+    width: 100%; padding: 12px; margin: 10px 0;
+    border-radius: 8px; border: none; outline: none;
+  }
+  input { background: #1e293b; color:#fff; border:1px solid #334155; }
+  select { background: #1e293b; color:#fff; border:1px solid #334155; }
+  button { background: #38bdf8; color: #0f172a; font-weight: bold; cursor: pointer; }
+  button:hover { background: #0ea5e9; }
+  .info {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 12px;
+    border-left: 4px solid #38bdf8;
+    display: none;
+  }
+  .info div { margin: 8px 0; font-size: 15px; border-bottom: 1px solid #2d3748; padding-bottom: 5px; }
+  .info div:last-child { border-bottom:none; }
+  .msg { padding: 12px; border-radius:10px; margin-top:15px; text-align:center; display:none; }
+  .success { background:#dcfce7; color:#065f46; }
+  .error { background:#fee2e2; color:#991b1b; }
+  .home-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #38bdf8;
+    color: #0f172a;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+  .home-btn:hover { background-color: #0ea5e9; transform: scale(1.05); }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="home-btn">Back</a>
+
+<div class="card">
+  <h3 id="title">Employee Leave Portal</h3>
+
+  <select id="langSelect">
+    <option value="ar">عربي</option>
+    <option value="en">English</option>
+    <option value="tr">Türkçe</option>
+  </select>
+
+  <input id="code" placeholder="Enter employee code" />
+  <button id="btnSearch">Search</button>
+
+  <div id="info" class="info">
+    <div><strong id="lblName">Name:</strong> <span id="name"></span></div>
+    <div><strong id="lblDep">Dep:</strong> <span id="dept"></span></div>
+    <div><strong id="lblBalance">Balance:</strong> <span id="balance"></span></div>
+    <div><strong id="lblUsed">Used Days:</strong> <span id="used"></span></div>
+    <div><strong id="lblCasual">Casual Leaves:</strong> <span id="casual"></span></div>
+  </div>
+
+  <div id="msg" class="msg"></div>
+</div>
+
+<script>
+  const API = "https://script.google.com/macros/s/AKfycbwfzIhxglGTVQv5NVFfzOXIfrWQ3m8m0YCiioEuy3Y5JFwicMxeG3RzFv-x7mspO3e_/exec"; // ضع هنا لينك App Script
+  const el = id => document.getElementById(id);
+  const showMsg = (text, cls) => {
+    const m = el('msg');
+    m.textContent = text;
+    m.className = 'msg ' + (cls || '');
+    m.style.display = text ? 'block' : 'none';
+  };
+
+  const translations = {
+    ar: {
+      title: "بوابة اجازات الموظفين",
+      codePlaceholder: "ادخل كود الموظف",
+      searchBtn: "بحث",
+      lblName: "الاسم:",
+      lblDep: "القسم:",
+      lblBalance: "الرصيد:",
+      lblUsed: "الأيام المستهلكة:",
+      lblCasual: "الإجازات العارضة:",
+      notFound: "الموظف غير موجود",
+      enterCode: "الرجاء ادخال الكود"
+    },
+    en: {
+      title: "Employee Leave Portal",
+      codePlaceholder: "Enter employee code",
+      searchBtn: "Search",
+      lblName: "Name:",
+      lblDep: "Dep:",
+      lblBalance: "Balance:",
+      lblUsed: "Used Days:",
+      lblCasual: "Casual Leaves:",
+      notFound: "Employee not found",
+      enterCode: "Please enter code"
+    },
+    tr: {
+      title: "Çalışan İzin Portalı",
+      codePlaceholder: "Çalışan kodunu girin",
+      searchBtn: "Ara",
+      lblName: "Adı:",
+      lblDep: "Bölüm:",
+      lblBalance: "Bakiye:",
+      lblUsed: "Kullanılan Günler:",
+      lblCasual: "Günlük İzinler:",
+      notFound: "Çalışan bulunamadı",
+      enterCode: "Lütfen kod girin"
+    }
+  };
+
+  function updateLanguage(lang){
+    const t = translations[lang];
+    el('title').innerText = t.title;
+    el('code').placeholder = t.codePlaceholder;
+    el('btnSearch').innerText = t.searchBtn;
+    el('lblName').innerText = t.lblName;
+    el('lblDep').innerText = t.lblDep;
+    el('lblBalance').innerText = t.lblBalance;
+    el('lblUsed').innerText = t.lblUsed;
+    el('lblCasual').innerText = t.lblCasual;
+  }
+
+  el('langSelect').addEventListener('change', ()=>updateLanguage(el('langSelect').value));
+
+  // افتراضياً عربي
+  updateLanguage('ar');
+
+  el('btnSearch').addEventListener('click', async () => {
+    showMsg('Searching...', 'success');
+    el('info').style.display = 'none';
+    const code = el('code').value.trim();
+    if(!code) { showMsg(translations[el('langSelect').value].enterCode, 'error'); return; }
+
+    try{
+      const res = await fetch(`${API}?action=getEmployee&code=${encodeURIComponent(code)}`);
+      const data = await res.json();
+      if(data.success){
+        el('name').innerText = data.name;
+        el('dept').innerText = data.department;
+        el('balance').innerText = data.balance;
+        el('used').innerText = data.used;
+        el('casual').innerText = data.casual;
+        el('info').style.display = 'block';
+        showMsg('', '');
+      } else {
+        showMsg(translations[el('langSelect').value].notFound, 'error');
+      }
+    }catch(err){
+      showMsg('Connection error', 'error');
+    }
+  });
+</script>
+
+</body>
+</html>
