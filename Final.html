@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubyred Leave Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #38bdf8; --accent: #0ea5e9; --danger: #f87171; --glass: rgba(15, 23, 42, 0.85); }
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s ease; }
+        
+        body { 
+            font-family: 'Cairo', 'Poppins', sans-serif; 
+            background: radial-gradient(circle at top right, #1e293b, #0f172a); 
+            color: #f8fafc; min-height: 100vh; display: flex; 
+            align-items: center; justify-content: center; padding: 20px; 
+        }
+
+        .card { 
+            background: var(--glass); backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255,255,255,0.1); padding: 35px; 
+            border-radius: 24px; width: 100%; max-width: 450px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4); position: relative; 
+        }
+
+        /* تنسيق زر العودة */
+        .back-link {
+            position: absolute; top: 20px; right: 20px;
+            font-size: 13px; color: var(--primary); text-decoration: none;
+            font-weight: bold; border: 1px solid var(--primary);
+            padding: 5px 15px; border-radius: 8px; background: rgba(56, 189, 248, 0.05);
+            z-index: 10;
+        }
+        .back-link:hover { background: var(--primary); color: #0f172a; }
+
+        /* تنسيق اختيار اللغة */
+        .lang-switch { position: absolute; top: 20px; left: 20px; }
+        select { background: #334155; color: white; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+
+        /* تعديل الاتجاهات للغات LTR */
+        .ltr .back-link { right: auto; left: 20px; }
+        .ltr .lang-switch { left: auto; right: 20px; }
+
+        h3 { text-align: center; margin-bottom: 25px; color: var(--primary); font-size: 24px; margin-top: 15px; }
+        input { width: 100%; padding: 14px; background: rgba(0,0,0,0.3); border: 1px solid #334155; border-radius: 12px; color: white; margin-bottom: 15px; outline: none; text-align: center; font-size: 16px; }
+        input:focus { border-color: var(--primary); }
+        
+        button { width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; background: var(--primary); color: #0f172a; margin-top: 10px; font-size: 16px; }
+        button:hover:not(:disabled) { opacity: 0.9; transform: translateY(-2px); }
+        button:disabled { background: #475569; cursor: not-allowed; }
+
+        .info-box { background: rgba(255,255,255,0.03); border-radius: 16px; padding: 20px; margin-top: 20px; display: none; }
+        .section-title { font-size: 11px; color: var(--primary); border-bottom: 1px solid #334155; margin: 15px 0 10px; padding-bottom: 5px; text-transform: uppercase; }
+        .info-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .info-label { color: #94a3b8; font-size: 14px; }
+        .info-value { font-weight: 600; font-size: 14px; }
+        .highlight { color: var(--primary); font-weight: 700; font-size: 15px; }
+        
+        .btn-logout { background: transparent; color: var(--danger); border: 1px solid var(--danger); margin-top: 25px; }
+        #msg { text-align: center; margin-top: 15px; font-size: 14px; font-weight: 600; min-height: 20px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .rtl { direction: rtl; } .ltr { direction: ltr; }
+    </style>
+</head>
+<body class="rtl" id="body-tag">
+
+<div class="card">
+    <a href="index.html" id="btnBack" class="back-link">رجوع</a>
+
+    <div class="lang-switch">
+        <select id="langSelect">
+            <option value="ar">العربية</option>
+            <option value="en">English</option>
+            <option value="tr">Türkçe</option>
+        </select>
+    </div>
+
+    <div id="login-page">
+        <h3 id="t-login">تسجيل الدخول</h3>
+        <input type="text" id="username" placeholder="اسم المستخدم">
+        <input type="password" id="password" placeholder="كلمة المرور">
+        <button id="btnLogin">دخول</button>
+    </div>
+
+    <div id="search-page" style="display: none;">
+        <h3 id="t-search">البحث عن موظف</h3>
+        <input type="text" id="empCode" placeholder="كود الموظف">
+        <button id="btnSearch">بحث</button>
+        
+        <div id="info" class="info-box">
+            <div class="section-title" id="t-base">البيانات الأساسية</div>
+            <div class="info-item"><span class="info-label" id="l-name">الاسم:</span><span id="res-name" class="info-value"></span></div>
+            <div class="info-item"><span class="info-label" id="l-dept">القسم:</span><span id="res-dept" class="info-value"></span></div>
+            <div class="info-item"><span class="info-label" id="l-job">المسمى الوظيفي:</span><span id="res-job" class="highlight"></span></div>
+            <div class="section-title" id="t-leave">سجل الإجازات</div>
+            <div class="info-item"><span class="info-label" id="l-bal">إجمالي الرصيد:</span><span id="res-balance" class="highlight"></span></div>
+            <div class="info-item"><span class="info-label" id="l-used">المستهلك:</span><span id="res-used" class="info-value"></span></div>
+            <div class="info-item"><span class="info-label" id="l-cas">العارضة:</span><span id="res-casual" class="info-value"></span></div>
+        </div>
+        <button id="btnLogout" class="btn-logout">خروج</button>
+    </div>
+    <div id="msg"></div>
+</div>
+
+<script>
+    const API = "https://script.google.com/macros/s/AKfycbwZtbZZTTmf0AP6gx8qjTkgsW_UlxnAUjq_v1vH9T62_n_bvXcnI2MJskEp9iV_cLhK/exec"; 
+    const el = id => document.getElementById(id);
+    let curUser = "", curPass = "";
+
+    const langs = {
+        ar: { login: "تسجيل الدخول", user: "اسم المستخدم", pass: "كلمة المرور", btnL: "دخول", search: "البحث عن موظف", code: "كود الموظف", btnS: "بحث", base: "البيانات الأساسية", name: "الاسم:", dept: "القسم:", job: "المسمى الوظيفي:", leave: "سجل الإجازات", bal: "إجمالي الرصيد:", used: "المستهلك:", cas: "العارضة:", logout: "تسجيل خروج", loading: "جاري البحث...", logging: "جاري تسجيل الدخول...", back: "رجوع" },
+        en: { login: "Login", user: "Username", pass: "Password", btnL: "Login", search: "Employee Search", code: "Employee Code", btnS: "Search", base: "Basic Info", name: "Name:", dept: "Dept:", job: "Job Title:", leave: "Leave Records", bal: "Total Balance:", used: "Used Days:", cas: "Casual:", logout: "Logout", loading: "Searching...", logging: "Logging in...", back: "Back" },
+        tr: { login: "Giriş Yap", user: "Kullanıcı Adı", pass: "Şifre", btnL: "Giriş", search: "Çalışan Arama", code: "Çalışan Kodu", btnS: "Ara", base: "Temel Bilgiler", name: "İsim:", dept: "Bölüm:", job: "Pozisyon:", leave: "İzin Kayıtları", bal: "Toplam Bakiye:", used: "Kullanılan:", cas: "Günlük İzin:", logout: "Çıkış", loading: "Aranıyor...", logging: "Giriş yapılıyor...", back: "Geri" }
+    };
+
+    function setLang(l) {
+        const d = langs[l];
+        el('body-tag').className = l === 'ar' ? 'rtl' : 'ltr';
+        el('btnBack').innerText = d.back;
+        el('t-login').innerText = d.login;
+        el('username').placeholder = d.user; el('password').placeholder = d.pass; el('btnLogin').innerText = d.btnL;
+        el('t-search').innerText = d.search; el('empCode').placeholder = d.code; el('btnSearch').innerText = d.btnS;
+        el('t-base').innerText = d.base; el('l-name').innerText = d.name; el('l-dept').innerText = d.dept;
+        el('l-job').innerText = d.job; el('t-leave').innerText = d.leave; el('l-bal').innerText = d.bal;
+        el('l-used').innerText = d.used; el('l-cas').innerText = d.cas; el('btnLogout').innerText = d.logout;
+    }
+
+    el('langSelect').onchange = (e) => setLang(e.target.value);
+
+    el('btnLogin').onclick = async () => {
+        const u = el('username').value.trim(), p = el('password').value.trim(), l = el('langSelect').value;
+        if(!u || !p) return;
+        el('btnLogin').disabled = true; el('msg').innerText = langs[l].logging; el('msg').style.color = "#38bdf8";
+        try {
+            const r = await fetch(`${API}?action=login&username=${encodeURIComponent(u)}&password=${encodeURIComponent(p)}&lang=${l}`);
+            const d = await r.json();
+            if(d.success) { curUser = u; curPass = p; el('login-page').style.display='none'; el('search-page').style.display='block'; el('msg').innerText = ""; }
+            else { el('msg').innerText = d.msg; el('msg').style.color = "#f87171"; el('btnLogin').disabled = false; }
+        } catch(e) { el('msg').innerText = "Error"; el('btnLogin').disabled = false; }
+    };
+
+    el('btnSearch').onclick = async () => {
+        const c = el('empCode').value.trim(), l = el('langSelect').value;
+        if(!c) return;
+        el('msg').innerText = langs[l].loading; el('msg').style.color = "#4ade80";
+        try {
+            const r = await fetch(`${API}?action=getEmployee&username=${encodeURIComponent(curUser)}&password=${encodeURIComponent(curPass)}&code=${encodeURIComponent(c)}&lang=${l}`);
+            const d = await r.json();
+            if(d.success) {
+                el('res-name').innerText = d.v_name || "---"; el('res-dept').innerText = d.v_dept || "---"; 
+                el('res-job').innerText = d.v_jd || "---"; el('res-balance').innerText = d.v_bal || "0"; 
+                el('res-used').innerText = d.v_used || "0"; el('res-casual').innerText = d.v_cas || "0"; 
+                el('info').style.display = 'block'; el('msg').innerText = "";
+            } else { el('msg').innerText = d.msg; el('msg').style.color = "#f87171"; el('info').style.display = 'none'; }
+        } catch(e) { el('msg').innerText = "Error"; }
+    };
+
+    el('btnLogout').onclick = () => location.reload();
+</script>
+</body>
+</html>
